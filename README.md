@@ -51,29 +51,6 @@ npm run build
 npm start
 ```
 
-### Environment Variables
-
-Copy `.env.example` to `.env.local` and configure the following variables:
-
-```bash
-cp .env.example .env.local
-```
-
-Required environment variables:
-
-- `NEXTAUTH_SECRET` - Secret key for NextAuth.js (generate with `node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"`)
-- `NEXTAUTH_URL` - Your application URL (e.g., `http://localhost:3000` for local development)
-
-### Deployment
-
-#### Netlify
-
-1. Connect your repository to Netlify
-2. Set environment variables in Netlify dashboard:
-   - `NEXTAUTH_SECRET` - Your generated secret key
-   - `NEXTAUTH_URL` - Your Netlify site URL
-3. Deploy automatically on push to main branch
-
 ## Frameworks and Libraries Used
 
 ### Core Framework
@@ -105,38 +82,6 @@ Required environment variables:
 ### Authentication
 
 - **next-auth 4.24.14** - Authentication solution
-
-## Project Structure
-
-```
-my-app/
-├── app/                    # Next.js App Router
-│   ├── api/               # API routes
-│   │   ├── timesheets/    # Timesheet endpoints
-│   ├── dashboard/         # Dashboard page
-│   └── timesheets/        # Timesheet pages
-├── components/            # React components
-│   ├── auth/             # Authentication components
-│   ├── common/           # Shared components (Button, Dropdown, etc.)
-│   ├── layout/           # Layout components (Header, Footer)
-│   ├── timesheet/        # Timesheet-related components
-│   └── timesheet-detail/ # Timesheet detail components
-├── hooks/                # Custom React hooks
-├── lib/                  # Utility libraries
-├── mocks/                # Mock data for development
-├── services/             # API service layer
-├── types/                # TypeScript type definitions
-└── constants/            # Application constants
-```
-
-## Key Features
-
-- **Timesheet Management**: View, create, and update timesheets
-- **Date Range Filtering**: Filter timesheets by date range with custom date picker
-- **Status Filtering**: Filter by timesheet status (COMPLETED, INCOMPLETE, MISSING)
-- **Pagination**: Paginated table view with configurable rows per page
-- **Responsive Design**: Mobile-friendly interface using TailwindCSS
-- **Mock Data**: Comprehensive mock data covering 25 weeks of 2026
 
 ## Assumptions and Notes
 
@@ -180,18 +125,7 @@ The following features were implemented during development:
 4. **DateRangePicker Component** - Disabled future dates, improved cursor styling
 5. **Mock Data Updates** - Updated all dates from 2024 to 2026, corrected week dates to match actual 2026 calendar, extended data through June 2026
 6. **API Route** - Fixed date filtering logic with UTC normalization
-
-## Learn More
-
-To learn more about the technologies used:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API
-- [Material-UI Documentation](https://mui.com/) - component library documentation
-- [TailwindCSS Documentation](https://tailwindcss.com/) - utility-first CSS framework
-- [Day.js Documentation](https://day.js.org/) - lightweight date manipulation library
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+7. **Skeleton Loading** - Implemented TableSkeleton and DetailSkeleton components for better UX during data fetching
+8. **Type Safety** - Replaced all `any` types with proper TypeScript interfaces
+9. **Code Quality** - Added Prettier, Husky, and lint-staged for automatic formatting and linting
+10. **UI Improvements** - Added back button to detail page, dropdown arrow to date picker with rotation animation
