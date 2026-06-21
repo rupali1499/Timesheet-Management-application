@@ -1,8 +1,4 @@
-interface PaginationProps {
-  currentPage: number;
-  totalPages: number;
-  onPageChange: (page: number) => void;
-}
+import { PaginationProps } from "@/types/propsTypes";
 
 export default function Pagination({
   currentPage,
@@ -11,10 +7,7 @@ export default function Pagination({
 }: PaginationProps) {
   const generatePages = () => {
     if (totalPages <= 8) {
-      return Array.from(
-        { length: totalPages },
-        (_, i) => i + 1
-      );
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
     }
 
     return [1, 2, 3, 4, 5, "...", totalPages];
@@ -26,9 +19,7 @@ export default function Pagination({
     <div className="flex items-center gap-1 text-xs text-[#8C8C8C]">
       <button
         disabled={currentPage === 1}
-        onClick={() =>
-          onPageChange(currentPage - 1)
-        }
+        onClick={() => onPageChange(currentPage - 1)}
         className="px-2 py-1 hover:text-black disabled:cursor-not-allowed disabled:opacity-50"
       >
         Previous
@@ -36,18 +27,13 @@ export default function Pagination({
 
       {pages.map((page, index) =>
         page === "..." ? (
-          <span
-            key={`ellipsis-${index}`}
-            className="px-1"
-          >
+          <span key={`ellipsis-${index}`} className="px-1">
             ...
           </span>
         ) : (
           <button
             key={page}
-            onClick={() =>
-              onPageChange(Number(page))
-            }
+            onClick={() => onPageChange(Number(page))}
             className={`min-w-[20px] px-1 py-1 transition ${
               currentPage === page
                 ? "font-semibold text-[#2F80ED]"
@@ -60,12 +46,8 @@ export default function Pagination({
       )}
 
       <button
-        disabled={
-          currentPage === totalPages
-        }
-        onClick={() =>
-          onPageChange(currentPage + 1)
-        }
+        disabled={currentPage === totalPages}
+        onClick={() => onPageChange(currentPage + 1)}
         className="px-2 py-1 hover:text-black disabled:cursor-not-allowed disabled:opacity-50"
       >
         Next

@@ -1,15 +1,4 @@
-// components/common/Input.tsx
-
-interface InputProps {
-  label: string;
-  name: string;
-  type?: string;
-  placeholder?: string;
-  error?: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  additionalClasses?: string;
-}
+import { InputProps } from "@/types/propsTypes";
 
 export default function Input({
   label,
@@ -40,11 +29,7 @@ export default function Input({
         className={`w-full rounded-lg border px-4 h-[42px] flex items-center border-gray-300 text-[14px] placeholder:text-gray-500 outline-none ${additionalClasses}`}
       />
 
-      {error && (
-        <p className="mt-1 text-sm text-red-500">
-          {error}
-        </p>
-      )}
+      {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
     </div>
   );
 }

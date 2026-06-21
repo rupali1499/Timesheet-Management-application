@@ -1,22 +1,12 @@
-interface Props {
-  status:
-    | "COMPLETED"
-    | "INCOMPLETE"
-    | "MISSING";
-}
+import { StatusBadgeProps } from "@/types/propsTypes";
 
-export default function StatusBadge({
-  status,
-}: Props) {
+export default function StatusBadge({ status }: StatusBadgeProps) {
   const statusStyles = {
-    COMPLETED:
-      "bg-[#DEF7EC] text-[#03543F]",
+    COMPLETED: "bg-[#DEF7EC] text-[#03543F]",
 
-    INCOMPLETE:
-      "bg-[#FDF6B2] text-[#723B13]",
+    INCOMPLETE: "bg-[#FDF6B2] text-[#723B13]",
 
-    MISSING:
-      "bg-[#FCE8F3] text-[#99154B]",
+    MISSING: "bg-[#FCE8F3] text-[#99154B]",
   };
 
   return (

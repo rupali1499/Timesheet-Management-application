@@ -5,18 +5,21 @@ A Next.js application for managing timesheets with filtering, date range selecti
 ## Setup Instructions
 
 ### Prerequisites
+
 - Node.js (v20 or higher)
 - npm, yarn, pnpm, or bun
 
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone <repository-url>
 cd my-app
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 # or
@@ -28,6 +31,7 @@ bun install
 ```
 
 3. Run the development server:
+
 ```bash
 npm run dev
 # or
@@ -47,14 +51,39 @@ npm run build
 npm start
 ```
 
+### Environment Variables
+
+Copy `.env.example` to `.env.local` and configure the following variables:
+
+```bash
+cp .env.example .env.local
+```
+
+Required environment variables:
+
+- `NEXTAUTH_SECRET` - Secret key for NextAuth.js (generate with `node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"`)
+- `NEXTAUTH_URL` - Your application URL (e.g., `http://localhost:3000` for local development)
+
+### Deployment
+
+#### Netlify
+
+1. Connect your repository to Netlify
+2. Set environment variables in Netlify dashboard:
+   - `NEXTAUTH_SECRET` - Your generated secret key
+   - `NEXTAUTH_URL` - Your Netlify site URL
+3. Deploy automatically on push to main branch
+
 ## Frameworks and Libraries Used
 
 ### Core Framework
+
 - **Next.js 16.2.9** - React framework with App Router
 - **React 19.2.4** - UI library
 - **TypeScript 5** - Type safety
 
 ### UI Components & Styling
+
 - **@mui/material 9.1.1** - Material-UI component library
 - **@mui/x-date-pickers 9.6.0** - Date picker components
 - **TailwindCSS 4** - Utility-first CSS framework
@@ -62,16 +91,19 @@ npm start
 - **@emotion/styled 11.14.1** - Styled components
 
 ### Utilities
+
 - **dayjs 1.11.21** - Date manipulation library
 - **axios 1.18.0** - HTTP client
 - **react-icons 5.6.0** - Icon library
 - **react-hot-toast 2.6.0** - Toast notifications
 
 ### Form Handling
+
 - **formik 2.4.9** - Form management
 - **yup 1.7.1** - Schema validation
 
 ### Authentication
+
 - **next-auth 4.24.14** - Authentication solution
 
 ## Project Structure
@@ -109,26 +141,30 @@ my-app/
 ## Assumptions and Notes
 
 ### Date Handling
+
 - All dates are stored in ISO 8601 format (UTC)
 - Date filtering normalizes dates to UTC midnight for consistent comparison
 - Week numbering follows ISO standards (Monday as first day of week)
 - Future dates are disabled in the date picker to prevent invalid selections
 
 ### Mock Data
+
 - Mock data covers 25 weeks from December 29, 2025 to June 19, 2026
 - Each week represents Monday-Friday workdays
 - Timesheet status is calculated based on total hours vs target hours (40 hours)
 - Status logic:
   - 0 hours = MISSING
-  - >= 40 hours = COMPLETED
+  - > = 40 hours = COMPLETED
   - < 40 hours = INCOMPLETE
 
 ### API Routes
+
 - API routes include a 500ms delay to simulate network latency
 - All timesheet data is currently mocked (no database integration)
 - Date range filtering uses overlap logic to include any week that intersects with the selected range
 
 ### Component Architecture
+
 - Custom dropdown component replaces native select elements for consistent styling
 - Material-UI Dialog component used for modals with custom styling via sx prop
 - Icons from react-icons library (IoIos family)

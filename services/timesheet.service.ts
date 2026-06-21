@@ -1,30 +1,31 @@
-import { Timesheet } from "@/types/timesheet";
+import { Timesheet } from "@/types/propsTypes";
 
-export const getTimesheets =
-  async (params?: { status?: string; startDate?: string; endDate?: string }): Promise<Timesheet[]> => {
-    const searchParams = new URLSearchParams();
-    
-    if (params?.status) {
-      searchParams.append("status", params.status);
-    }
-    if (params?.startDate) {
-      searchParams.append("startDate", params.startDate);
-    }
-    if (params?.endDate) {
-      searchParams.append("endDate", params.endDate);
-    }
+export const getTimesheets = async (params?: {
+  status?: string;
+  startDate?: string;
+  endDate?: string;
+}): Promise<Timesheet[]> => {
+  const searchParams = new URLSearchParams();
 
-    const url = searchParams.toString() 
-      ? `/api/timesheets?${searchParams.toString()}`
-      : "/api/timesheets";
+  if (params?.status) {
+    searchParams.append("status", params.status);
+  }
+  if (params?.startDate) {
+    searchParams.append("startDate", params.startDate);
+  }
+  if (params?.endDate) {
+    searchParams.append("endDate", params.endDate);
+  }
 
-    const response = await fetch(url);
+  const url = searchParams.toString()
+    ? `/api/timesheets?${searchParams.toString()}`
+    : "/api/timesheets";
 
-    if (!response.ok) {
-      throw new Error(
-        "Failed to fetch timesheets"
-      );
-    }
+  const response = await fetch(url);
 
-    return response.json();
-  };
+  if (!response.ok) {
+    throw new Error("Failed to fetch timesheets");
+  }
+
+  return response.json();
+};

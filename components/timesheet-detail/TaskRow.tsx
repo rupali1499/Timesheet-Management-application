@@ -1,13 +1,7 @@
 import TaskActions from "./TimeActions";
+import { Task } from "@/types/propsTypes";
 
-
-interface Props {
-  task: any;
-}
-
-export default function TaskRow({
-  task,
-}: Props) {
+export default function TaskRow({ task }: { task: Task }) {
   return (
     <div className="mb-2 flex h-auto sm:h-11 flex-col sm:flex-row items-start sm:items-center rounded border border-[#ECECEC] px-3 py-2 sm:py-0 ">
       <div className="flex-1 text-gray-900 text-sm sm:text-base">

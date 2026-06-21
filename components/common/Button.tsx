@@ -1,10 +1,6 @@
 // components/common/Button.tsx
 
-interface ButtonProps {
-  children: React.ReactNode;
-  type?: "button" | "submit";
-  loading?: boolean;
-}
+import { ButtonProps } from "@/types/propsTypes";
 
 export default function Button({
   children,

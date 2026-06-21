@@ -1,9 +1,9 @@
-interface Props {
-  totalHours: number;
-  targetHours: number;
-}
+import { TimesheetProgressProps } from "@/types/propsTypes";
 
-export default function TimesheetProgress({ totalHours, targetHours }: Props) {
+export default function TimesheetProgress({
+  totalHours,
+  targetHours,
+}: TimesheetProgressProps) {
   const progress = (totalHours / targetHours) * 100;
 
   return (
@@ -15,7 +15,7 @@ export default function TimesheetProgress({ totalHours, targetHours }: Props) {
       </div>
 
       <div className="h-2 rounded bg-gray-200 w-full sm:w-[200px]">
-        <div 
+        <div
           className="h-2 rounded bg-orange-400"
           style={{ width: `${progress}%` }}
         />

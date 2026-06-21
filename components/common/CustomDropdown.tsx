@@ -1,22 +1,8 @@
 "use client";
 
+import { CustomDropdownProps } from "@/types/propsTypes";
 import { useState, useRef, useEffect } from "react";
 import { FiChevronDown } from "react-icons/fi";
-
-interface Option {
-  value: string;
-  label: string;
-}
-
-interface CustomDropdownProps {
-  label?: string;
-  name?: string;
-  value: string;
-  onChange: (value: string) => void;
-  options: Option[];
-  className?: string;
-  placeholder?: string;
-}
 
 export default function CustomDropdown({
   label,
@@ -34,7 +20,10 @@ export default function CustomDropdown({
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
@@ -73,7 +62,9 @@ export default function CustomDropdown({
             ${className}
           `}
         >
-          <span className="block truncate">{selectedOption?.label || placeholder}</span>
+          <span className="block truncate">
+            {selectedOption?.label || placeholder}
+          </span>
           <FiChevronDown
             size={16}
             className={`absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 transition-transform ${

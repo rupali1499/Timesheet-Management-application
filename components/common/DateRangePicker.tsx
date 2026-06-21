@@ -3,12 +3,8 @@
 import { useState, useRef } from "react";
 import { ClickAwayListener, Box, Button } from "@mui/material";
 import dayjs, { Dayjs } from "dayjs";
-
-interface DateRangePickerProps {
-  value: [string | null, string | null];
-  onChange: (value: [string | null, string | null]) => void;
-  className?: string;
-}
+import { FiChevronDown } from "react-icons/fi";
+import { DateRangePickerProps } from "@/types/propsTypes";
 
 export default function DateRangePicker({
   value,
@@ -76,7 +72,9 @@ export default function DateRangePicker({
 
   const isDateInRange = (date: Dayjs) => {
     if (!tempStartDate || !tempEndDate) return false;
-    return date.isAfter(tempStartDate, "day") && date.isBefore(tempEndDate, "day");
+    return (
+      date.isAfter(tempStartDate, "day") && date.isBefore(tempEndDate, "day")
+    );
   };
 
   const isDateToday = (date: Dayjs) => {
@@ -91,21 +89,21 @@ export default function DateRangePicker({
     const firstDay = currentMonth.startOf("month");
     const lastDay = currentMonth.endOf("month");
     const days: Dayjs[] = [];
-    
+
     const startOfWeek = firstDay.day();
     for (let i = 0; i < startOfWeek; i++) {
       days.push(firstDay.subtract(startOfWeek - i, "day"));
     }
-    
+
     for (let i = 0; i < lastDay.date(); i++) {
       days.push(firstDay.add(i, "day"));
     }
-    
+
     const endOfWeek = lastDay.day();
     for (let i = 1; i < 7 - endOfWeek; i++) {
       days.push(lastDay.add(i, "day"));
     }
-    
+
     return days;
   };
 
@@ -116,9 +114,13 @@ export default function DateRangePicker({
         value={formatDateRange()}
         onClick={handleOpen}
         readOnly
-        className="h-[42px] w-full rounded-md border border-[#E0E0E0] bg-white px-3 text-xs text-[#4F4F4F] outline-none focus:border-[#2F80ED] cursor-pointer"
+        className="h-[42px] w-full rounded-md border border-[#E0E0E0] bg-white px-3 text-xs text-[#4F4F4F] outline-none focus:border-[#2F80ED] cursor-pointer pr-10"
       />
-      
+      <FiChevronDown
+        size={16}
+        className={`absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none transition-transform ${open ? "rotate-180" : ""}`}
+      />
+
       {open && (
         <ClickAwayListener onClickAway={handleCancel}>
           <Box
@@ -203,9 +205,10 @@ export default function DateRangePicker({
                         onClick={() => !isDisabled && handleDateSelect(date)}
                         disabled={isDisabled}
                         className={`flex size-7 items-center justify-center rounded text-[12px] transition-colors
-                           ${isDisabled 
-                             ? "cursor-not-allowed text-gray-300 bg-transparent hover:bg-transparent" 
-                             : `${isSelected ? "bg-blue-500 text-white" : "hover:bg-blue-100 cursor-pointer"} ${isInRange && !isSelected ? "bg-blue-100" : ""} ${isToday && !isSelected ? "border border-blue-400" : ""} ${!isCurrentMonth ? "text-gray-400" : "text-gray-700"}`
+                           ${
+                             isDisabled
+                               ? "cursor-not-allowed text-gray-300 bg-transparent hover:bg-transparent"
+                               : `${isSelected ? "bg-blue-500 text-white" : "hover:bg-blue-100 cursor-pointer"} ${isInRange && !isSelected ? "bg-blue-100" : ""} ${isToday && !isSelected ? "border border-blue-400" : ""} ${!isCurrentMonth ? "text-gray-400" : "text-gray-700"}`
                            }
                         `}
                       >
@@ -218,11 +221,7 @@ export default function DateRangePicker({
             </Box>
 
             <Box className="mt-3 flex justify-end gap-2 w-full">
-              <Button
-                variant="outlined"
-                size="small"
-                onClick={handleCancel}
-              >
+              <Button variant="outlined" size="small" onClick={handleCancel}>
                 Cancel
               </Button>
               <Button

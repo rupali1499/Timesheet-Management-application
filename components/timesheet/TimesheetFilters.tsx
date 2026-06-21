@@ -3,6 +3,7 @@
 import { IoCloseCircleOutline } from "react-icons/io5";
 import CustomDropdown from "../common/CustomDropdown";
 import DateRangePicker from "../common/DateRangePicker";
+import { TimesheetFiltersProps } from "@/types/propsTypes";
 
 const statusOptions = [
   { value: "", label: "Status" },
@@ -11,15 +12,6 @@ const statusOptions = [
   { value: "MISSING", label: "Missing" },
 ];
 
-interface Props {
-  statusFilter: string;
-  onStatusChange: (value: string) => void;
-  onStatusClear: () => void;
-  dateRangeFilter: [string | null, string | null];
-  onDateRangeChange: (value: [string | null, string | null]) => void;
-  onDateRangeClear: () => void;
-}
-
 export default function TimesheetFilters({
   statusFilter,
   onStatusChange,
@@ -27,7 +19,7 @@ export default function TimesheetFilters({
   dateRangeFilter,
   onDateRangeChange,
   onDateRangeClear,
-}: Props) {
+}: TimesheetFiltersProps) {
   return (
     <div className="mb-5 flex flex-col sm:flex-row items-start sm:items-center gap-2">
       <div className="relative w-full sm:w-auto">
